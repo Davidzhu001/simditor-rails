@@ -5192,12 +5192,15 @@ TableButton = (function(superClass) {
   };
 
   TableButton.prototype.decorate = function($table) {
-    var $headRow, $tbody, $thead;
+    var $colgroup, $headRow, $resizeHandle, $tbody, $thead, $wrapper;
     if ($table.parent('.simditor-table').length > 0) {
       this.undecorate($table);
     }
+    
     $table.wrap('<div class="simditor-table"></div>');
-        $table.attr("table table-bordered","1");//加上这句代码
+    $table.attr("table table-bordered","1");//加上这句代码
+    $wrapper = $table.parent('.simditor-table');
+    $colgroup = $table.find('colgroup');
     if ($table.find('thead').length < 1) {
       $thead = $('<thead />');
       $headRow = $table.find('tr').first();
