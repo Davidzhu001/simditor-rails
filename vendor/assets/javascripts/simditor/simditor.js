@@ -472,7 +472,8 @@ Formatter = (function(superClass) {
 
   Formatter.prototype._init = function() {
     this.editor = this._module;
-    this._allowedTags = $.merge(['br', 'span', 'a', 'img', 'b', 'strong', 'i', 'strike', 'u', 'font', 'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'h1', 'h2', 'h3', 'h4', 'hr'], this.opts.allowedTags);
+//在$merge最后面的那个hr标签后面，加上table标签，这个是我已经加好了的。
+    this._allowedTags = $.merge(['br', 'span', 'a', 'img', 'b', 'strong', 'i', 'strike', 'u', 'font', 'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'h1', 'h2', 'h3', 'h4', 'hr','table'], this.opts.allowedTags);
     this._allowedAttributes = $.extend({
       img: ['src', 'alt', 'width', 'height', 'data-non-image'],
       a: ['href', 'target'],
@@ -490,7 +491,8 @@ Formatter = (function(superClass) {
       h1: ['margin-left', 'text-align'],
       h2: ['margin-left', 'text-align'],
       h3: ['margin-left', 'text-align'],
-      h4: ['margin-left', 'text-align']
+      h4: ['margin-left', 'text-align'], 
+      table: ['table table-bordered']
     }, this.opts.allowedStyles);
     return this.editor.body.on('click', 'a', function(e) {
       return false;
@@ -5195,6 +5197,7 @@ TableButton = (function(superClass) {
       this.undecorate($table);
     }
     $table.wrap('<div class="simditor-table"></div>');
+        $table.attr("table table-bordered","1");//加上这句代码
     if ($table.find('thead').length < 1) {
       $thead = $('<thead />');
       $headRow = $table.find('tr').first();
